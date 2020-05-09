@@ -1,13 +1,14 @@
 package com.jiguangchao;
 
-import java.io.File;
+import java.io.*;
+
 
 public class FileTree {
     private File root;
     private String[] lines = {"└─ ","├─ ","│"};
     private char indentChar = ' ';
     private int indentNum = 4;
-    private int[] bitMap ;
+    private String[] ignores = {".git", ".idea", ".gitignore"};
 
     public FileTree(File root) {
         this.root = root;
@@ -23,6 +24,42 @@ public class FileTree {
 
     public void show() {
         this.showTree(this.root, 0, 0, 0);
+    }
+
+    public void xcopy() {
+
+    }
+
+    private boolean copy(String source, String target) {
+        byte[] buff = new byte[1024];
+        try(
+                var fis = new FileInputStream(source);
+                var fos = new FileOutputStream(target))
+        {
+            while(fis.read(buff) != -1)
+                fos.write(buff);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    private class filter implements FilenameFilter {
+        @Override
+        public boolean accept(File dir, String name) {
+            boolean ret = true;
+            for (String ignore: ignores) {
+                if(name.endsWith(ignore)) {
+                    ret = false;
+                    break;
+                }
+            }
+            return ret;
+        }
     }
 /*
 package_sample
@@ -46,7 +83,8 @@ package_sample
              i--;
          }
         // 判断parent是否是最后一个节点（是否还有兄弟节点）这里不是很严谨，因为不能保证每次listFiles的顺序。后续再改进
-         File[] children = parent.getParentFile().listFiles();
+         File[] children = parent.getParentFile().listFiles(new filter());
+        // 如果parent为父节点的最后一个节点，则返回false,否则返回true
          return  !parent.equals(children[children.length -1]);
     }
 
@@ -73,7 +111,7 @@ package_sample
         }
         System.out.println(name);
         if(entry.isDirectory()) {
-            File[] children = entry.listFiles();
+            File[] children = entry.listFiles(new filter());
             for (int i = 0; i < children.length; i++) {
                 showTree(children[i], depth + 1, i, children.length - 1);
             }
