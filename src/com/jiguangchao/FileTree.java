@@ -1,6 +1,7 @@
 package com.jiguangchao;
 
 import java.io.*;
+import java.nio.file.Path;
 
 
 public class FileTree {
@@ -26,15 +27,38 @@ public class FileTree {
         this.showTree(this.root, 0, 0, 0);
     }
 
-    public void xcopy() {
-
+    public void copyTo(String target) {
+        this.copyTree(this.root, new File(target));
+    }
+    /*
+      1. entry 为file, target 为 dir
+      2. entry 为file, target 为 file
+      3. entry dir, target 为 dir
+      4. entry dir, target 为 file (报错)
+     */
+    public void copyTree(File entry, File target) {
+        // mkdirs 保证目标文件夹存在，不存在则新建
+        target.mkdirs();
+        // 把path看做是目标文件的路径
+        File targetFile = Path.of(target.getAbsolutePath(), entry.getName()).toFile();
+        if(entry.isFile()) {
+            copyFile(entry, targetFile);
+        }
+        else {
+            // 把path看做目标文件夹的路径，递归进行处理
+            for (File child: entry.listFiles()) {
+                copyTree(child, targetFile);
+            }
+        }
     }
 
-    private boolean copy(String source, String target) {
+
+    private boolean copyFile(File source, File target) {
         byte[] buff = new byte[1024];
-        try(
+        try (
                 var fis = new FileInputStream(source);
-                var fos = new FileOutputStream(target))
+                var fos = new FileOutputStream(target)
+        )
         {
             while(fis.read(buff) != -1)
                 fos.write(buff);
