@@ -4,7 +4,6 @@
     <list default="true" id="7cb67d5b-b61a-406d-9329-c14cdebd45f8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/jiguangchao/FileTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jiguangchao/FileTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jiguangchao/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jiguangchao/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,17 +59,29 @@
       <option name="presentableId" value="Default" />
       <updated>1588766514599</updated>
     </task>
+    <task id="LOCAL-00001" summary="completed file tree copy functions">
+      <created>1589100394993</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589100394993</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="completed file tree copy functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="completed file tree copy functions" />
   </component>
   <component name="WindowStateProjectService">
     <state x="956" y="220" key="#com.intellij.ide.util.MemberChooser" timestamp="1588989770500">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="956" y="220" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1588989770500" />
-    <state x="145" y="35" key="CommitChangelistDialog2" timestamp="1589079021252">
+    <state x="145" y="35" key="CommitChangelistDialog2" timestamp="1589100394296">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="145" y="35" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1589079021252" />
+    <state x="145" y="35" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1589100394296" />
     <state width="1537" height="240" key="GridCell.Tab.0.bottom" timestamp="1589100116856">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

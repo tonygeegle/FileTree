@@ -85,19 +85,8 @@ public class FileTree {
             return ret;
         }
     }
-/*
-package_sample
-└─ src
-    ├─ hong
-    │  └─ Person.java
-    │  ming
-    │  └─ Person.java
-    └─ mr
-       └─ jun
-          └─ Arrays.java
- */
+
     // depth >=2 的时候才会调用该方法
-    // entry = .name   index = 1   depth =2
     private boolean isVerticalLine(File entry, int depthIndex, int depth) {
         // 回溯找到当前节点指定depthIndex的祖先
          int i = depth;
