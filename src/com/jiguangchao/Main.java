@@ -31,7 +31,7 @@ public class Main {
 //        FileTree ft;
 //        ft = new FileTree();
 //        ft.show();
-        var ft = new FileTree("D:\\Java");
+        var ft = new FileTree(".");
         ft.show();
         ft.copyTo("D:\\copyTest3");
         new FileTree("D:\\copyTest3").show();

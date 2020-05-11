@@ -2,6 +2,8 @@ package com.jiguangchao;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
+
 
 
 public class FileTree {
@@ -86,6 +88,28 @@ public class FileTree {
         }
     }
 
+    /*
+    包装File类的listFiles方法，使得文件夹的顺序在前，文件在后。
+     */
+    private File[] listSortedFiles(File dir) {
+        if (dir.isDirectory()) {
+            ArrayList<File> dirs = new ArrayList<>();
+            ArrayList<File> files = new ArrayList<>();
+            File[] fileLists = dir.listFiles(new filter());
+
+            for (File f:fileLists) {
+                if (f.isDirectory()) {
+                    dirs.add(f);
+                } else {
+                    files.add(f);
+                }
+            }
+            dirs.addAll(files);
+            return dirs.toArray(new File[fileLists.length]);
+        }
+        return null;
+    }
+
     // depth >=2 的时候才会调用该方法
     private boolean isVerticalLine(File entry, int depthIndex, int depth) {
         // 回溯找到当前节点指定depthIndex的祖先
@@ -96,7 +120,7 @@ public class FileTree {
              i--;
          }
         // 判断parent是否是最后一个节点（是否还有兄弟节点）这里不是很严谨，因为不能保证每次listFiles的顺序。后续再改进
-         File[] children = parent.getParentFile().listFiles(new filter());
+         File[] children = listSortedFiles(parent.getParentFile());
         // 如果parent为父节点的最后一个节点，则返回false,否则返回true
          return  !parent.equals(children[children.length -1]);
     }
@@ -124,7 +148,7 @@ public class FileTree {
         }
         System.out.println(name);
         if(entry.isDirectory()) {
-            File[] children = entry.listFiles(new filter());
+            File[] children = listSortedFiles(entry);
             for (int i = 0; i < children.length; i++) {
                 showTree(children[i], depth + 1, i, children.length - 1);
             }
